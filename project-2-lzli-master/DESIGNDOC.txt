@@ -1,0 +1,20 @@
+Changes to defs.h, exec.c, kthread.h, main.c, proc.h, syscall.c, sysproc.c, proc.c
+
+
+defs.h: kill_others, kill_all, minit declarations
+exec.c: added kill_others to exec
+kthread.h: 8 kthread function declarations
+main.c: added minit
+proc.h: added struct mutex, new mutexstates, and TBLOCKED
+syscall.c: added kthread functions into syscall function table
+sysproc.c: syscall intermediate implementations
+proc.c: syscall implementations
+
+
+synchronization to shared fields: 
+when calling wakeup1 and sched in kthread_exit, ptable locks are used.
+when calling sleep in kthread_join, ptable locks are used.
+
+expected behavior of existing system calls:
+exit is used in kthread_exit.
+sleep is used in kthread_join

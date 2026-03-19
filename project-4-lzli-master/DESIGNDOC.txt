@@ -1,0 +1,16 @@
+CHANGED: defs.h, Makefile, mmu.h, proc.c, trap.c, vm.c, syscall.c, syscall.h, sysproc.c, user.h, usys.s
+
+defs.h: added cow and pageful declarations
+Makefile: added testcow call
+Mmu.h add shared flag
+proc.c extended procdump
+trap.c: page fault handler
+Vm.c: counter structure, inituvm, cow, pagefault
+syscall.c: procdump syscall
+syscall.h: procdump syscall
+syscall.c: procdump syscall
+Sysproc.c: procdump syscall
+user.h procdump syscall
+Usys.S: procdump syscall
+
+

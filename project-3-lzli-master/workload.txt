@@ -1,0 +1,8 @@
+The first test program runs two processes: one on a high cpu workload, and one a io workload. The graph shows that both processes decline from q0 to q2 (despite the graph not registering the q0 and q1 durations). Not enough waiting time between the two would prompt a boost to q0.
+
+The second test runs 7 threads: 1 parent, which forks into 6 children each doing a io workload. Every process descend into q2 from q0 with some joining midway. Soon a pattern forms where some in q2 jumps to q0 before descending again, demonstrating the boosting mechanism.
+
+The third test runs 2 threads: 1 on a sleep() loop, another waiting. The sleep loop calls getpinfo at the end. The sleep loop lingers in q0 and q1, ducking below the threshold to be demoted when it's duration is 0.
+
+
+Duration of 0 schedules changed to 1 for graph to register.

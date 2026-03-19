@@ -1,0 +1,24 @@
+
+Changed: Makefile, defs.h, proc.c, proc.h, pstat.h, syscall.c, syscall.h, sysproc.c, user.h, usys.s, test1.c, test2.c, test3.c, trap.c
+
+Makefile: added _test1, _test2, _test3
+defs.h: added boost and getpinfo declarations
+proc.c: altered getpinfo(), scheduler(), allocproc(), userinit(), and boost()
+Proc.h.: added new proc properties and 3 queues.
+Pstat.h: for sched_stat_t
+Syscall.C: getpinfo syscall
+Syscall.h: getpinfo syscall
+sysproc.c: getpinfo syscall
+user.h: getpinfo syscall
+Usys.S: getpinfo syscall
+Test1.c: test1
+test2.c: test2
+test3.c: test3
+Trap.c: added yield rule for queues
+
+
+For MFQ policies, I added the scheduling rules in scheduler(), the new process rules in allocproc, and a one line reset in userinit(). The scheduler checks for runnables in q0 before q1 and before q2 each time it schedules a process. Used processes get demoted.
+Boosting is called in every case after process switch which checks for wait times in q2 above 50. 
+The first test program runs two processes: one on a high cpu workload, and one a io workload.
+The second test runs 7 threads: 1 parent, which forks into 5 children, each doing an io workload. Every thread calls getpinfo at the end
+The third test runs 2 threads: 1 in a sleep loop, another waiting. The sleep thread calls getpinfo at the end.
